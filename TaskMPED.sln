@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskMPED", "TaskMPED\TaskMPED.csproj", "{2D08E222-DAE8-4AD2-A9F3-DCB8EECEEAFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D08E222-DAE8-4AD2-A9F3-DCB8EECEEAFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D08E222-DAE8-4AD2-A9F3-DCB8EECEEAFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D08E222-DAE8-4AD2-A9F3-DCB8EECEEAFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D08E222-DAE8-4AD2-A9F3-DCB8EECEEAFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8AAEB806-B289-4808-A3C9-9C86009096A1}
+	EndGlobalSection
+EndGlobal

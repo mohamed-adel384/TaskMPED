@@ -1,0 +1,128 @@
+﻿@model EmployeeFormViewModel
+
+@{ 
+    ViewData["Title"] = "Employee Form";
+}
+<h2>
+    @(Model.Id > 0 ? "Edit" : "Create") Employee
+</h2>
+
+<section class="row justify-content-between">
+    <div class="col-md-4">
+        <form method="post" asp-action="@(Model.Id > 0 ? "Edit" : "Create")" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            @*Name*@
+            <div class="form-group">
+                <label class="text-muted" asp-for="Name"></label>
+                <input type="text" class="form-control" asp-for="Name" maxlength="250" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            @*Email*@
+            <div class="form-group">
+                <label class="text-muted" asp-for="Email"></label>
+                <input type="text" class="form-control" asp-for="Email" maxlength="250" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            @*DateOfBirth value="@(Model.DateOfBirth > 0 ? Model.DateOfBirth : string.Empty)"*@
+            <div class="form-group ">
+                <label class="text-muted" asp-for="DateOfBirth"></label>
+                <input  id="Year" type="datetime"  class="form-control" asp-for="DateOfBirth"  />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+
+            @*Phone*@
+            <div class="form-group">
+                <label class="text-muted" asp-for="Phone"></label>
+                <input type="number" class="form-control" asp-for="Phone" maxlength="250" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            @*Address*@
+            <div class="form-group">
+                <label class="text-muted" asp-for="Address"></label>
+                <textarea class="form-control" asp-for="Address" maxlength="2500" rows="4"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            @*department*@
+            <div class="form-group">
+                <label class="text-muted" asp-for="Dep_Id"></label>
+                <select class="form-control" asp-for="Dep_Id" asp-items="@(new SelectList(Model.Departments,"Id","Name"))">
+                    <option>
+                        choose Department
+                    </option>
+                </select>
+                <span asp-validation-for="Dep_Id" class="text-danger"></span>
+            </div>
+            @*department*@
+            <div class="form-group">
+                <label class="text-muted" asp-for="City_Id"></label>
+                <select class="form-control" asp-for="City_Id" asp-items="@(new SelectList(Model.Cities,"Id","Name"))">
+                    <option>
+                        choose City
+                    </option>
+                </select>
+                <span asp-validation-for="City_Id" class="text-danger"></span>
+            </div>
+
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" asp-for="Image" accept="image/*" />
+                <label class="custom-file-label" asp-for="Image"></label>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <button onclick="test()" type="submit" class="btn btn-primary mt-4">
+                <i class="bi bi-check"></i>
+                Save
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary mt-4">
+                <i class="bi bi-x"></i>
+                Cancel
+            </a>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <div id="image-container" class="@(Model.Id > 0 ? string.Empty : "d-none")">
+            <img src="@(Model.Id > 0 ? $"data:image/*;base64, {Convert.ToBase64String(Model.Image)}" : String.Empty)" alt="Image-Movie" class="img-thumbnail" />
+        </div>
+    </div>
+</section>
+
+@section Scripts{ 
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            // create Employee [Part 1 - Select extention in label]
+            // (1) select Element = in ViewModel:-
+            $('#Image').on('change', function () {
+                var selectedFile = $(this).val().split('\\').pop();
+            // (2) select label:-
+                //sibilings => element in the same level and convert to text:
+                $(this).siblings('label').text(selectedFile)
+            // (3) [Part 2 -Render Image]
+                var imageContainer = $('#image-container');
+                // (4) show Image after Select it:-
+                var image_var = window.URL.createObjectURL(this.files[0]);
+                imageContainer.removeClass('d-none');
+                imageContainer.find('img').attr('src', image_var);
+            });
+            //=====================Year-Birth================================
+            $('#Year').datepicker({
+                
+                autoclose: true,
+                startDate: new Date('01-01-1900'),
+                endDate: new Date(),
+                format: 'dd/mm/yyyy',
+                //dateFormat: 'dd/mm/yyyy',
+                changeYear: true,
+                changeMonth: true
+                //viewMode:'years'            
+            });
+            
+        });
+
+        
+    </script>
+}
